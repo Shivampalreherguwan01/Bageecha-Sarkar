@@ -7,83 +7,83 @@
     <style>
         body {
             margin: 0; padding: 0;
-            background: #ff9933; /* भगवा रंग */
+            background: #ff9933;
             background-image: linear-gradient(rgba(255, 153, 51, 0.8), rgba(255, 87, 34, 0.9)), 
                               url('https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000');
             background-size: cover; background-attachment: fixed;
             color: white; font-family: 'Arial', sans-serif; text-align: center;
         }
-        .header { padding: 40px; }
-        h1 { font-size: 3rem; text-shadow: 2px 2px 10px #000; margin: 10px 0; }
-        .diya { font-size: 50px; animation: glow 1.5s infinite alternate; }
-        @keyframes glow { from { text-shadow: 0 0 10px #fff; } to { text-shadow: 0 0 30px #ff8c00; } }
-
-        .section { background: rgba(255, 255, 255, 0.1); margin: 20px; padding: 20px; border-radius: 15px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); }
-        
-        .pooja-item { display: inline-block; width: 100px; margin: 10px; }
-        .pooja-item img { width: 70px; border-radius: 10px; }
-
-        .btn { background: #d32f2f; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        
-        /* QR Code Section */
-        .qr-section img { width: 150px; background: white; padding: 10px; border-radius: 10px; margin-top: 10px; }
-
-        /* Admin Icon */
-        .admin-icon { position: fixed; bottom: 20px; right: 20px; font-size: 24px; cursor: pointer; opacity: 0.5; }
-        .admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: black; padding: 30px; border-radius: 15px; z-index: 100; box-shadow: 0 0 20px #000; }
+        .section { background: rgba(0, 0, 0, 0.3); margin: 15px; padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
+        .upload-box { background: white; color: black; padding: 15px; border-radius: 10px; margin-top: 10px; }
+        .gallery-display { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+        .gallery-display img, .gallery-display video { width: 140px; height: 140px; object-fit: cover; border-radius: 10px; border: 2px solid gold; }
+        .btn-pay { background: #d32f2f; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 10px; }
+        .admin-icon { position: fixed; bottom: 20px; right: 20px; font-size: 24px; cursor: pointer; opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="diya">🪔</div>
-        <h1>🚩 जय श्री राम 🚩</h1>
-        <h2>जय बगीचा सरकार</h2>
+    <div style="padding: 20px;">
+        <h1>🚩 जय बगीचा सरकार 🚩</h1>
+        <p>करेरा, मध्य प्रदेश</p>
     </div>
 
     <div class="section">
-        <h3>🙏 ऑनलाइन पूजा सामग्री</h3>
-        <div class="pooja-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png"><br>नारियल ₹20
+        <h3>📸 अपनी गैलरी से फोटो/वीडियो डालें</h3>
+        <div class="upload-box">
+            <input type="file" id="fileInput" accept="image/*,video/*" multiple style="margin-bottom: 10px;">
+            <br>
+            <button onclick="uploadFiles()" style="background: orange; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">Upload Now</button>
         </div>
-        <div class="pooja-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png"><br>मिठाई ₹10
-        </div>
-        <div class="pooja-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png"><br>अगरबत्ती ₹2
-        </div><br>
-        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha%20Sarkar&cu=INR" class="btn">दान करें / पूजा करें</a>
+        <div class="gallery-display" id="gallery">
+            </div>
     </div>
 
-    <div class="section qr-section">
-        <h3>📲 वेबसाइट शेयर करें</h3>
-        <p>स्कैन करके दर्शन करें</p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shivampalreherguwan01.github.io/Bageecha-Sarkar/" alt="QR Code">
+    <div class="section">
+        <h3>🙏 ऑनलाइन सेवा</h3>
+        <p>नारियल: ₹20 | मिठाई: ₹10 | अगरबत्ती: ₹2</p>
+        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha Sarkar&cu=INR" class="btn-pay">पैसे दान करें (UPI)</a>
     </div>
 
     <div class="admin-icon" onclick="openAdmin()">🔒</div>
 
-    <div id="adminBox" class="admin-panel">
-        <h3>Admin Dashboard</h3>
-        <p>यहाँ से आप फोटो और सेटिंग बदल पाएंगे</p>
-        <button onclick="alert('Admin functionality connecting to Firebase...')">Upload New Photo</button><br><br>
-        <button onclick="closeAdmin()">Close</button>
-    </div>
-
     <script>
+        // गैलरी फंक्शन
+        function uploadFiles() {
+            const fileInput = document.getElementById('fileInput');
+            const gallery = document.getElementById('gallery');
+            
+            const files = fileInput.files;
+            if (files.length === 0) { alert("कृपया फोटो या वीडियो चुनें!"); return; }
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    let element;
+                    if (file.type.startsWith('image/')) {
+                        element = document.createElement('img');
+                    } else if (file.type.startsWith('video/')) {
+                        element = document.createElement('video');
+                        element.controls = true;
+                    }
+                    element.src = e.target.result;
+                    gallery.appendChild(element);
+                };
+                reader.readAsDataURL(file);
+            }
+            alert("अपलोड सफल! (अभी यह सिर्फ आपके फोन पर दिखेगा, स्थायी सेव के लिए डेटाबेस चाहिए)");
+        }
+
         function openAdmin() {
             let pass = prompt("एडमिन पासवर्ड डालें:");
             if (pass === "9343747271Shivam") {
-                document.getElementById('adminBox').style.display = 'block';
-            } else {
-                alert("Galat Password!");
-            }
-        }
-        function closeAdmin() {
-            document.getElementById('adminBox').style.display = 'none';
+                alert("नमस्ते शिवम! आप अब एडमिन मोड में हैं।");
+                // यहाँ आप ब्लॉक करने या बैकग्राउंड बदलने की कोडिंग जोड़ सकते हैं
+            } else { alert("गलत पासवर्ड!"); }
         }
     </script>
-
 </body>
-    </html>
-    
+        </html>
+        
