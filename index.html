@@ -5,85 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>जय बगीचा सरकार</title>
     <style>
-        body {
-            margin: 0; padding: 0;
-            background: #ff9933;
-            background-image: linear-gradient(rgba(255, 153, 51, 0.8), rgba(255, 87, 34, 0.9)), 
-                              url('https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000');
-            background-size: cover; background-attachment: fixed;
-            color: white; font-family: 'Arial', sans-serif; text-align: center;
-        }
-        .section { background: rgba(0, 0, 0, 0.3); margin: 15px; padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); }
-        .upload-box { background: white; color: black; padding: 15px; border-radius: 10px; margin-top: 10px; }
-        .gallery-display { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-        .gallery-display img, .gallery-display video { width: 140px; height: 140px; object-fit: cover; border-radius: 10px; border: 2px solid gold; }
-        .btn-pay { background: #d32f2f; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 10px; }
-        .admin-icon { position: fixed; bottom: 20px; right: 20px; font-size: 24px; cursor: pointer; opacity: 0.7; }
+        body { margin: 0; background: #ff9933; font-family: 'Arial', sans-serif; text-align: center; color: white; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000'); background-size: cover; background-attachment: fixed; }
+        .header { padding: 30px; font-size: 2.5rem; font-weight: bold; text-shadow: 2px 2px 10px #000; }
+        
+        /* Pooja Samagri Section */
+        .pooja-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; padding: 10px; }
+        .pooja-card { background: white; color: black; border-radius: 15px; width: 100px; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 2px solid gold; }
+        .pooja-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .pooja-card b { display: block; margin-top: 5px; color: #d32f2f; }
+
+        /* Donors List */
+        .donor-section { background: rgba(255, 255, 255, 0.2); margin: 15px; padding: 15px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .donor-item { display: flex; align-items: center; justify-content: space-between; background: white; color: black; margin: 5px 0; padding: 8px 15px; border-radius: 10px; }
+        .donor-item img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
+        .top-donor { border: 2px solid gold; background: #fffdf0; transform: scale(1.02); }
+
+        /* Small Upload Box */
+        .upload-mini { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px; margin: 10px auto; width: 80%; border: 1px dashed white; }
+        
+        .btn-pay { background: #28a745; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
+        .admin-icon { position: fixed; bottom: 15px; right: 15px; opacity: 0.5; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div style="padding: 20px;">
-        <h1>🚩 जय बगीचा सरकार 🚩</h1>
-        <p>करेरा, मध्य प्रदेश</p>
-    </div>
+    <div class="header">🚩 जय बगीचा सरकार 🚩</div>
 
     <div class="section">
-        <h3>📸 अपनी गैलरी से फोटो/वीडियो डालें</h3>
-        <div class="upload-box">
-            <input type="file" id="fileInput" accept="image/*,video/*" multiple style="margin-bottom: 10px;">
-            <br>
-            <button onclick="uploadFiles()" style="background: orange; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">Upload Now</button>
-        </div>
-        <div class="gallery-display" id="gallery">
+        <h3>🙏 ऑनलाइन पूजा सामग्री</h3>
+        <div class="pooja-container">
+            <div class="pooja-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png" alt="Nariyal">
+                <span>नारियल</span>
+                <b>₹20</b>
             </div>
+            <div class="pooja-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png" alt="Mithai">
+                <span>मिठाई</span>
+                <b>₹10</b>
+            </div>
+            <div class="pooja-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png" alt="Agarbatti">
+                <span>अगरबत्ती</span>
+                <b>₹2</b>
+            </div>
+        </div>
+        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha Sarkar&cu=INR" class="btn-pay">💰 दान / पूजा करें</a>
     </div>
 
-    <div class="section">
-        <h3>🙏 ऑनलाइन सेवा</h3>
-        <p>नारियल: ₹20 | मिठाई: ₹10 | अगरबत्ती: ₹2</p>
-        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha Sarkar&cu=INR" class="btn-pay">पैसे दान करें (UPI)</a>
+    <div class="donor-section">
+        <h3>🏆 दानदाताओं की सूची</h3>
+        <div id="donorList">
+            <div class="donor-item top-donor">
+                <div style="display:flex; align-items:center;">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                    <b>शिवम (Admin)</b>
+                </div>
+                <b>₹501</b>
+            </div>
+            <div class="donor-item">
+                <div style="display:flex; align-items:center;">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                    <span>भक्त 1</span>
+                </div>
+                <span>₹101</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="upload-mini">
+        <span style="font-size:14px;">📸 फोटो/वीडियो जोड़ें:</span>
+        <input type="file" id="fileInp" accept="image/*,video/*" style="width:120px; font-size:10px;">
+        <button onclick="alert('Uploading...')" style="padding:2px 10px; font-size:12px; cursor:pointer;">Upload</button>
     </div>
 
     <div class="admin-icon" onclick="openAdmin()">🔒</div>
 
     <script>
-        // गैलरी फंक्शन
-        function uploadFiles() {
-            const fileInput = document.getElementById('fileInput');
-            const gallery = document.getElementById('gallery');
-            
-            const files = fileInput.files;
-            if (files.length === 0) { alert("कृपया फोटो या वीडियो चुनें!"); return; }
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    let element;
-                    if (file.type.startsWith('image/')) {
-                        element = document.createElement('img');
-                    } else if (file.type.startsWith('video/')) {
-                        element = document.createElement('video');
-                        element.controls = true;
-                    }
-                    element.src = e.target.result;
-                    gallery.appendChild(element);
-                };
-                reader.readAsDataURL(file);
-            }
-            alert("अपलोड सफल! (अभी यह सिर्फ आपके फोन पर दिखेगा, स्थायी सेव के लिए डेटाबेस चाहिए)");
-        }
-
         function openAdmin() {
-            let pass = prompt("एडमिन पासवर्ड डालें:");
+            let pass = prompt("Enter Password:");
             if (pass === "9343747271Shivam") {
-                alert("नमस्ते शिवम! आप अब एडमिन मोड में हैं।");
-                // यहाँ आप ब्लॉक करने या बैकग्राउंड बदलने की कोडिंग जोड़ सकते हैं
-            } else { alert("गलत पासवर्ड!"); }
+                alert("Welcome Admin Shivam!");
+            } else { alert("Wrong Password!"); }
         }
     </script>
+
 </body>
-        </html>
-        
+    </html>
+    
