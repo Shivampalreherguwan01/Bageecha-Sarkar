@@ -4,103 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>जय बगीचा सरकार</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     <style>
         body { margin: 0; background: #ff9933; font-family: 'Arial', sans-serif; text-align: center; color: white; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000'); background-size: cover; background-attachment: fixed; }
         .header { padding: 30px; font-size: 2.5rem; font-weight: bold; text-shadow: 2px 2px 10px #000; }
-        
-        /* Pooja Samagri Cards */
-        .pooja-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; padding: 10px; }
-        .pooja-card { background: white; color: black; border-radius: 15px; width: 100px; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 2px solid gold; }
-        .pooja-card img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
-        .pooja-card b { display: block; margin-top: 5px; color: #d32f2f; font-size: 14px; }
-
-        /* Donors List */
-        .donor-section { background: rgba(255, 255, 255, 0.15); margin: 15px; padding: 15px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .section { background: rgba(255, 255, 255, 0.15); margin: 15px; padding: 15px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .pooja-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+        .pooja-card { background: white; color: black; border-radius: 15px; width: 90px; padding: 8px; border: 2px solid gold; }
+        .pooja-card img { width: 45px; height: 45px; border-radius: 50%; }
+        .pooja-card b { display: block; color: #d32f2f; font-size: 13px; }
         .donor-item { display: flex; align-items: center; justify-content: space-between; background: white; color: black; margin: 5px 0; padding: 8px 15px; border-radius: 10px; font-size: 14px; }
-        .donor-item img { width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; }
         .top-donor { border: 2px solid gold; background: #fffdf0; }
-
-        /* Small Upload Box */
-        .upload-mini { background: rgba(0,0,0,0.4); padding: 8px; border-radius: 10px; margin: 10px auto; width: 85%; border: 1px dashed rgba(255,255,255,0.5); }
-        
-        .btn-pay { background: #28a745; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-
-        /* Floating QR & Admin Buttons */
-        .float-btn { position: fixed; bottom: 20px; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 100; }
+        .upload-mini { background: rgba(0,0,0,0.4); padding: 8px; border-radius: 10px; margin: 10px auto; width: 85%; border: 1px dashed white; }
+        .btn-pay { background: #28a745; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
+        .float-btn { position: fixed; bottom: 20px; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .qr-btn { left: 20px; background: white; color: black; }
-        .admin-btn { right: 20px; background: rgba(0,0,0,0.5); color: white; font-size: 18px; }
-
-        /* Modal (Popup) Style */
+        .admin-btn { right: 20px; background: rgba(0,0,0,0.5); color: white; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-content { background: white; color: black; padding: 20px; border-radius: 20px; width: 280px; position: relative; }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; color: grey; }
+        .modal-content { background: white; color: black; padding: 20px; border-radius: 20px; width: 280px; }
+        #gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
+        #gallery img, #gallery video { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid white; }
     </style>
 </head>
 <body>
 
-    <div class="header">🚩 जय श्री राम 🚩<br><span style="font-size: 1.5rem;">जय बगीचा सरकार</span></div>
+    <div class="header">🚩 जय बगीचा सरकार 🚩</div>
 
     <div class="section">
-        <h4 style="margin-bottom: 10px;">🙏 ऑनलाइन पूजा सेवा</h4>
         <div class="pooja-container">
-            <div class="pooja-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png">
-                <span>नारियल</span><b>₹20</b>
-            </div>
-            <div class="pooja-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png">
-                <span>मिठाई</span><b>₹10</b>
-            </div>
-            <div class="pooja-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png">
-                <span>अगरबत्ती</span><b>₹2</b>
-            </div>
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png"><span>नारियल</span><b>₹20</b></div>
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png"><span>मिठाई</span><b>₹10</b></div>
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png"><span>अगरबत्ती</span><b>₹2</b></div>
         </div>
         <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha Sarkar&cu=INR" class="btn-pay">💸 दान / पूजा करें</a>
     </div>
 
-    <div class="donor-section">
-        <h4 style="margin: 0 0 10px 0;">🏆 मुख्य दानदाता</h4>
-        <div id="donorList">
-            <div class="donor-item top-donor">
-                <div style="display:flex; align-items:center;"><img src="https://via.placeholder.com/40"><b>शिवम (Admin)</b></div>
-                <b>₹501</b>
-            </div>
-        </div>
+    <div class="section">
+        <h4 style="margin:0 0 10px 0;">🏆 दानदाताओं की सूची</h4>
+        <div id="donorList"></div>
+    </div>
+
+    <div class="section">
+        <h4>📸 भक्त दीर्घा (Gallery)</h4>
+        <div id="gallery"></div>
     </div>
 
     <div class="upload-mini">
-        <span style="font-size:12px;">📸 फोटो/वीडियो जोड़ें:</span>
-        <input type="file" id="fInp" accept="image/*,video/*" style="font-size:10px; width:120px;">
-        <button onclick="alert('Uploading to storage...')" style="padding:2px 8px; font-size:11px; cursor:pointer;">Upload</button>
+        <input type="file" id="fileInp" accept="image/*,video/*" style="font-size:10px; width:150px;">
+        <button onclick="handleUpload()" style="cursor:pointer;">Upload</button>
     </div>
 
-    <div class="float-btn qr-btn" onclick="toggleModal('qrModal')">📱</div>
+    <div class="float-btn qr-btn" onclick="document.getElementById('qrModal').style.display='flex'">📱</div>
     <div class="float-btn admin-btn" onclick="openAdmin()">🔒</div>
 
-    <div id="qrModal" class="modal" onclick="toggleModal('qrModal')">
+    <div id="qrModal" class="modal" onclick="this.style.display='none'">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="toggleModal('qrModal')">&times;</span>
-            <h3 style="margin-top:0;">Scan & Share</h3>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://shivampalreherguwan01.github.io/Bageecha-Sarkar/" style="width:200px; border:1px solid #eee;">
-            <p style="font-size:12px; color:grey; margin-top:10px;">इसे स्कैन करके सीधे दर्शन करें</p>
+            <h3>Scan & Share</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://shivampalreherguwan01.github.io/Bageecha-Sarkar/" style="width:200px;">
+            <p style="font-size:12px; color:grey;">जय बगीचा सरकार</p>
         </div>
     </div>
 
     <script>
-        function toggleModal(id) {
-            const m = document.getElementById(id);
-            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+        // आपका Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtrlqAPd7x8nrtdwvV19J6z2kWMFUtNf8",
+            authDomain: "bageecha-sarkar.firebaseapp.com",
+            projectId: "bageecha-sarkar",
+            storageBucket: "bageecha-sarkar.firebasestorage.app",
+            messagingSenderId: "1067748786139",
+            appId: "1:1067748786139:web:13df3fb1857224197fb1fe"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // गैलरी लोड करना
+        function loadGallery() {
+            db.collection("gallery").orderBy("time", "desc").onSnapshot(snap => {
+                let html = "";
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    if(data.type.includes("image")) html += `<img src="${data.url}">`;
+                    else html += `<video src="${data.url}" controls></video>`;
+                });
+                document.getElementById("gallery").innerHTML = html;
+            });
+        }
+
+        // दानदाता लोड करना
+        function loadDonors() {
+            db.collection("donors").orderBy("amount", "desc").onSnapshot(snap => {
+                let html = "";
+                snap.forEach((doc, index) => {
+                    const d = doc.data();
+                    html += `<div class="donor-item ${index===0?'top-donor':''}">
+                        <span><b>${index+1}.</b> ${d.name}</span>
+                        <b>₹${d.amount}</b>
+                    </div>`;
+                });
+                document.getElementById("donorList").innerHTML = html;
+            });
+        }
+
+        async function handleUpload() {
+            const file = document.getElementById("fileInp").files[0];
+            if(!file) return alert("File चुनें!");
+            const ref = storage.ref("gallery/" + Date.now() + "_" + file.name);
+            alert("Uploading... कृपया रुकें।");
+            await ref.put(file);
+            const url = await ref.getDownloadURL();
+            await db.collection("gallery").add({ url, type: file.type, time: Date.now() });
+            alert("सफल!");
         }
 
         function openAdmin() {
-            let pass = prompt("पासवर्ड डालें:");
-            if (pass === "9343747271Shivam") {
-                alert("स्वागत है शिवम! अब आप बदलाव कर सकते हैं।");
-            } else { alert("गलत पासवर्ड!"); }
+            let p = prompt("Password:");
+            if(p === "9343747271Shivam") {
+                let n = prompt("भक्त का नाम:");
+                let a = parseInt(prompt("राशि (₹):"));
+                if(n && a) db.collection("donors").add({ name: n, amount: a });
+            }
         }
-    </script>
 
+        loadGallery();
+        loadDonors();
+    </script>
 </body>
         </html>
-    
+                
