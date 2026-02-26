@@ -5,111 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>जय बगीचा सरकार</title>
     <style>
-        body {
-            background-color: #ffeadb;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            text-align: center;
-            color: #4a0e0e;
-        }
-        .header {
-            background: linear-gradient(orange, red);
-            color: white;
-            padding: 20px;
-            font-size: 40px;
-            font-weight: bold;
-            text-shadow: 2px 2px 5px black;
-        }
-        .mandir-photo {
-            width: 90%;
-            max-width: 600px;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 0 20px orange;
-        }
-        .section {
-            background: white;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .pooja-item {
-            display: inline-block;
-            width: 100px;
-            margin: 10px;
-        }
-        .pooja-item img { width: 80px; height: 80px; border-radius: 5px; }
-        .btn-dan {
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        /* Admin Login Style */
-        .admin-btn { margin-top: 50px; font-size: 12px; color: grey; cursor: pointer; }
+        :root { --saffron: #FF9933; --dark-red: #8B0000; }
+        body { background: #fff5e6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; text-align: center; }
+        .top-header { background: linear-gradient(to right, #ff4500, #ff8c00); color: white; padding: 15px; font-size: 32px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .hero-img { width: 100%; max-width: 500px; border: 5px solid white; border-radius: 15px; margin-top: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
+        .section { background: white; margin: 20px; padding: 20px; border-radius: 15px; border-bottom: 4px solid var(--saffron); }
+        .pooja-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .pooja-card { border: 1px solid #ddd; padding: 10px; border-radius: 10px; }
+        .pooja-card img { width: 60px; height: 60px; object-fit: cover; }
+        .btn-pay { background: #28a745; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; display: inline-block; margin-top: 15px; font-weight: bold; }
+        .admin-sec { display: none; background: #333; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
+        .admin-trigger { color: #ccc; font-size: 12px; margin: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="header">🚩 जय श्री राम 🚩<br>जय बगीचा सरकार</div>
+    <div class="top-header">🚩 जय श्री राम 🚩<br>जय बगीचा सरकार</div>
 
-    <img src="https://via.placeholder.com/600x400?text=Bageecha+Sarkar+Photo" alt="Mandir" class="mandir-photo">
+    <img src="https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000" class="hero-img" id="mainImg" alt="Bageecha Sarkar">
 
     <div class="section">
-        <h2>🙏 ऑनलाइन पूजा सामग्री</h2>
-        <div class="pooja-item">
-            <img src="https://via.placeholder.com/80/nariyal" alt="Nariyal">
-            <p>नारियल<br>₹20</p>
+        <h3>🙏 ऑनलाइन पूजा और सामग्री</h3>
+        <div class="pooja-grid">
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png"><br>नारियल<br><b>₹20</b></div>
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png"><br>मिठाई<br><b>₹10</b></div>
+            <div class="pooja-card"><img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png"><br>अगरबत्ती<br><b>₹2</b></div>
         </div>
-        <div class="pooja-item">
-            <img src="https://via.placeholder.com/80/mithai" alt="Mithai">
-            <p>मिठाई<br>₹10</p>
-        </div>
-        <div class="pooja-item">
-            <img src="https://via.placeholder.com/80/agarbatti" alt="Agarbatti">
-            <p>अगरबत्ती<br>₹2</p>
-        </div>
-        <br>
-        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha Sarkar&cu=INR" class="btn-dan">पैसे दान करें / पूजा करें</a>
+        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha%20Sarkar&cu=INR" class="btn-pay">पैसे दान करें / पूजा करें</a>
     </div>
 
     <div class="section">
-        <h3>📸 फोटो/वीडियो अपलोड करें</h3>
-        <input type="file" id="fileInput" accept="image/*,video/*">
-        <button onclick="alert('File Received!')">Upload</button>
-        <div id="gallery" style="margin-top: 20px;">
-            <p>अभी कोई फोटो नहीं है।</p>
-        </div>
+        <h3>📸 भक्तों द्वारा अपलोड की गई फोटो</h3>
+        <input type="file" id="userPhoto" style="margin-bottom: 10px;"><br>
+        <button onclick="alert('Photo upload logic connected!')">फोटो अपलोड करें</button>
     </div>
 
-    <div class="section">
-        <h3>📍 मंदिर की लोकेशन</h3>
-        <a href="https://www.google.com/maps" target="_blank">Google Maps पर देखें</a>
-    </div>
+    <div class="admin-trigger" onclick="loginAdmin()">Admin Login (For Shivam)</div>
 
-    <div class="section">
-        <h3>🏆 दानदाताओं की सूची</h3>
-        <ul id="donorsList" style="list-style: none; padding: 0;">
-            <li>🥇 शिवम पाल - ₹501</li>
-        </ul>
+    <div id="adminPanel" class="admin-sec">
+        <h2>Admin Dashboard</h2>
+        <p>यहाँ से आप वेबसाइट बदल सकते हैं</p>
+        <button onclick="changeBg()">Background बदलें</button><br><br>
+        <button onclick="alert('Block user feature active')">किसी को ब्लॉक करें</button><br><br>
+        <button onclick="closeAdmin()">Dashboard बंद करें</button>
     </div>
-
-    <div class="admin-btn" onclick="checkAdmin()">Admin Login</div>
 
     <script>
-        function checkAdmin() {
-            var pass = prompt("कृपया एडमिन पासवर्ड डालें:");
-            if (pass == "9343747271Shivam") {
-                alert("Welcome Shivam! अब आप बदलाव कर सकते हैं।");
-                // यहाँ हम एडमिन फीचर्स खोल सकते हैं
-            } else {
-                alert("गलत पासवर्ड!");
-            }
+        function loginAdmin() {
+            let pass = prompt("पासवर्ड डालें:");
+            if (pass === "9343747271Shivam") {
+                document.getElementById('adminPanel').style.display = 'block';
+            } else { alert("गलत पासवर्ड!"); }
+        }
+        function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
+        function changeBg() {
+            let color = prompt("नया बैकग्राउंड रंग (जैसे red, blue, green):");
+            document.body.style.background = color;
         }
     </script>
 
 </body>
-</html>
+    </html>
+    
