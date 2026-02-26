@@ -5,102 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>जय बगीचा सरकार</title>
     <style>
-        :root { --saffron: #FF9933; --gold: #FFD700; }
-        body { background: #fff5e6; font-family: 'Arial', sans-serif; margin: 0; text-align: center; transition: 0.5s; }
-        .top-header { background: linear-gradient(45deg, #ff4500, #ff8c00); color: white; padding: 20px; font-size: 35px; font-weight: bold; text-shadow: 2px 2px 5px #000; }
+        body {
+            margin: 0; padding: 0;
+            background: #ff9933; /* भगवा रंग */
+            background-image: linear-gradient(rgba(255, 153, 51, 0.8), rgba(255, 87, 34, 0.9)), 
+                              url('https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000');
+            background-size: cover; background-attachment: fixed;
+            color: white; font-family: 'Arial', sans-serif; text-align: center;
+        }
+        .header { padding: 40px; }
+        h1 { font-size: 3rem; text-shadow: 2px 2px 10px #000; margin: 10px 0; }
+        .diya { font-size: 50px; animation: glow 1.5s infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 10px #fff; } to { text-shadow: 0 0 30px #ff8c00; } }
+
+        .section { background: rgba(255, 255, 255, 0.1); margin: 20px; padding: 20px; border-radius: 15px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); }
         
-        /* Mandir Card */
-        .mandir-card { background: white; margin: 15px; border-radius: 20px; padding-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); overflow: hidden; }
-        .hero-img { width: 100%; max-height: 400px; object-fit: cover; }
+        .pooja-item { display: inline-block; width: 100px; margin: 10px; }
+        .pooja-item img { width: 70px; border-radius: 10px; }
+
+        .btn { background: #d32f2f; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         
-        /* Pooja Menu */
-        .pooja-box { display: flex; justify-content: space-around; padding: 20px; }
-        .item { background: #fff; padding: 10px; border-radius: 10px; border: 1px solid #ffcc80; width: 30%; }
-        .item img { width: 50px; }
+        /* QR Code Section */
+        .qr-section img { width: 150px; background: white; padding: 10px; border-radius: 10px; margin-top: 10px; }
 
-        /* Payment Button */
-        .pay-btn { background: #d32f2f; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-size: 20px; font-weight: bold; display: inline-block; margin: 20px; box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4); }
-
-        /* Admin Dashboard Overlay */
-        #adminDashboard { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); color: white; z-index: 1000; overflow-y: auto; padding-top: 50px; }
-        .admin-input { padding: 10px; width: 80%; margin: 10px; border-radius: 5px; border: none; }
-        .admin-btn { background: var(--saffron); border: none; padding: 10px 20px; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; margin: 5px; }
-
-        .footer-admin { color: #888; font-size: 12px; margin-top: 50px; cursor: pointer; }
+        /* Admin Icon */
+        .admin-icon { position: fixed; bottom: 20px; right: 20px; font-size: 24px; cursor: pointer; opacity: 0.5; }
+        .admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: black; padding: 30px; border-radius: 15px; z-index: 100; box-shadow: 0 0 20px #000; }
     </style>
 </head>
 <body>
 
-    <div class="top-header" id="siteTitle">🚩 जय श्री राम <br> जय बगीचा सरकार</div>
-
-    <div class="mandir-card">
-        <img src="https://images.unsplash.com/photo-1544013583-e74f8774773a?q=80&w=1000" class="hero-img" id="mainMandirImg">
-        <h2>🙏 दर्शन और सेवा</h2>
-        <p>बगीचा सरकार मंदिर, करेरा (म.प्र.) में आपका स्वागत है</p>
+    <div class="header">
+        <div class="diya">🪔</div>
+        <h1>🚩 जय श्री राम 🚩</h1>
+        <h2>जय बगीचा सरकार</h2>
     </div>
 
-    <div class="pooja-box">
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png"><br>नारियल<br>₹20</div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png"><br>मिठाई<br>₹10</div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png"><br>अगरबत्ती<br>₹2</div>
+    <div class="section">
+        <h3>🙏 ऑनलाइन पूजा सामग्री</h3>
+        <div class="pooja-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/6122/6122534.png"><br>नारियल ₹20
+        </div>
+        <div class="pooja-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/3014/3014515.png"><br>मिठाई ₹10
+        </div>
+        <div class="pooja-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/2611/2611116.png"><br>अगरबत्ती ₹2
+        </div><br>
+        <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha%20Sarkar&cu=INR" class="btn">दान करें / पूजा करें</a>
     </div>
 
-    <a href="upi://pay?pa=9343747271@ybl&pn=Bageecha%20Sarkar&cu=INR" class="pay-btn">💸 पूजा हेतु दान दें</a>
+    <div class="section qr-section">
+        <h3>📲 वेबसाइट शेयर करें</h3>
+        <p>स्कैन करके दर्शन करें</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shivampalreherguwan01.github.io/Bageecha-Sarkar/" alt="QR Code">
+    </div>
 
-    <div class="footer-admin" onclick="openAdmin()">Admin Login</div>
+    <div class="admin-icon" onclick="openAdmin()">🔒</div>
 
-    <div id="adminDashboard">
-        <h1>Welcome Shivam (Admin)</h1>
-        <p>यहाँ से आप बिना कोड के बदलाव कर सकते हैं:</p>
-        
-        <div style="border: 1px solid #444; padding: 15px; margin: 10px;">
-            <h3>1. मुख्य फोटो बदलें</h3>
-            <input type="text" id="newImgUrl" class="admin-input" placeholder="फोटो का लिंक यहाँ डालें">
-            <button class="admin-btn" onclick="updateImage()">Update Photo</button>
-        </div>
-
-        <div style="border: 1px solid #444; padding: 15px; margin: 10px;">
-            <h3>2. बैकग्राउंड कलर</h3>
-            <input type="color" id="bgColorPicker" style="height: 50px; width: 100px;">
-            <button class="admin-btn" onclick="updateBg()">Change BG</button>
-        </div>
-
-        <div style="border: 1px solid #444; padding: 15px; margin: 10px;">
-            <h3>3. दानदाताओं की लिस्ट (BETA)</h3>
-            <button class="admin-btn" onclick="alert('Database connecting...')">लिस्ट साफ़ करें</button>
-        </div>
-
-        <button class="admin-btn" style="background: red;" onclick="closeAdmin()">Logout / Close</button>
+    <div id="adminBox" class="admin-panel">
+        <h3>Admin Dashboard</h3>
+        <p>यहाँ से आप फोटो और सेटिंग बदल पाएंगे</p>
+        <button onclick="alert('Admin functionality connecting to Firebase...')">Upload New Photo</button><br><br>
+        <button onclick="closeAdmin()">Close</button>
     </div>
 
     <script>
         function openAdmin() {
             let pass = prompt("एडमिन पासवर्ड डालें:");
             if (pass === "9343747271Shivam") {
-                document.getElementById('adminDashboard').style.display = 'block';
+                document.getElementById('adminBox').style.display = 'block';
             } else {
-                alert("गलत पासवर्ड, शिवम भाई!");
+                alert("Galat Password!");
             }
         }
-
         function closeAdmin() {
-            document.getElementById('adminDashboard').style.display = 'none';
-        }
-
-        function updateImage() {
-            let url = document.getElementById('newImgUrl').value;
-            if(url) {
-                document.getElementById('mainMandirImg').src = url;
-                alert("फोटो बदल गई!");
-            }
-        }
-
-        function updateBg() {
-            let color = document.getElementById('bgColorPicker').value;
-            document.body.style.background = color;
-            alert("कलर बदल गया!");
+            document.getElementById('adminBox').style.display = 'none';
         }
     </script>
 
 </body>
-</html>
+    </html>
+    
